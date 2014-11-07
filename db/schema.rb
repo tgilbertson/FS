@@ -11,7 +11,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903170538) do
+ActiveRecord::Schema.define(version: 20141107190217) do
+
+  create_table "create_players", force: true do |t|
+    t.string   "player_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "player_position"
+    t.string   "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "people", force: true do |t|
+    t.string   "title"
+    t.string   "first_name",                null: false
+    t.string   "last_name",                 null: false
+    t.string   "email",         limit: 100, null: false
+    t.string   "telephone",     limit: 50
+    t.string   "mobile_phone",  limit: 50
+    t.string   "job_title"
+    t.date     "date_of_birth"
+    t.string   "gender",        limit: 1
+    t.string   "keywords"
+    t.text     "notes"
+    t.integer  "address_id"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "picks", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "picks", ["user_id"], name: "index_picks_on_user_id"
+
+  create_table "pins", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", force: true do |t|
+    t.string "player_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "player_position"
+    t.string "team_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -30,5 +81,13 @@ ActiveRecord::Schema.define(version: 20140903170538) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "visits", force: true do |t|
+    t.string   "country"
+    t.datetime "visited_at"
+    t.decimal  "load_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
